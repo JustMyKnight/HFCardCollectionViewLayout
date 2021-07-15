@@ -920,7 +920,7 @@ open class HFCardCollectionViewLayout: UICollectionViewLayout, UIGestureRecogniz
                 let transformScale = CGAffineTransform.init(scaleX: scale, y: scale)
                 let transformY = CGAffineTransform.init(translationX: 0, y: resetY * (1.0 + (1.0 - scale)))
                 
-                UIView.animate(withDuration: 0.3, animations: {
+                UIView.animate(withDuration: 0.2, animations: {
                     self.revealedCardCell?.transform = transformY.concatenating(transformScale)
                 }, completion: { (finished) in
                     if isNeedReload && finished {
@@ -956,7 +956,7 @@ open class HFCardCollectionViewLayout: UICollectionViewLayout, UIGestureRecogniz
                         self.collectionView?.insertSubview(self.movingCardSnapshotCell!, aboveSubview: cell)
                         cell.alpha = 0.0
                         self.movingCardSelectedIndex = indexPath.item
-                        UIView.animate(withDuration: 0.2, animations: {
+                        UIView.animate(withDuration: 0.1, animations: {
                             self.movingCardSnapshotCell?.frame.origin.y -= moveUpOffset
                         })
                     }
@@ -996,7 +996,7 @@ open class HFCardCollectionViewLayout: UICollectionViewLayout, UIGestureRecogniz
                             
                             if(movingCell != nil) {
                                 let cardHeadHeight = self.calculateCardHeadHeight()
-                                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut, animations: {
+                                UIView.animate(withDuration: 0.15, delay: 0, options: .curveEaseOut, animations: {
                                     movingCell?.frame.origin.y -= cardHeadHeight
                                 }, completion: { (finished) in
                                     movingCellAttr?.frame.origin.y -= cardHeadHeight
@@ -1028,7 +1028,7 @@ open class HFCardCollectionViewLayout: UICollectionViewLayout, UIGestureRecogniz
                         indexPath = self.movingCardLastTouchedIndexPath!
                     }
                     if let cell = self.collectionView?.cellForItem(at: indexPath) {
-                        UIView.animate(withDuration: 0.2, animations: {
+                        UIView.animate(withDuration: 0.1, animations: {
                             self.movingCardSnapshotCell?.frame = cell.frame
                         }, completion: { (finished) in
                             self.movingCardActive = false
