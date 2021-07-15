@@ -33,19 +33,6 @@ open class HFCardCollectionViewCell: UICollectionViewCell {
         self.contentView.backgroundColor = self.firstBackgroundColor
     }
     
-    /// Important for updating the Z index and setting the flag 'isUserInteractionEnabled'
-    ///
-    /// - Parameter layoutAttributes: The new layout attributes
-    override open func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.apply(layoutAttributes)
-        if let cardLayoutAttributes = layoutAttributes as? HFCardCollectionViewLayoutAttributes {
-            self.layer.zPosition = CGFloat(cardLayoutAttributes.zIndex)
-            self.contentView.isUserInteractionEnabled = cardLayoutAttributes.isRevealed
-        } else {
-            self.contentView.isUserInteractionEnabled = true
-        }
-    }
-    
     /// Overwritten to pass the backgroundColor to contentView and keep the cell itself transparent.
     override open var backgroundColor: UIColor? {
         set {
@@ -57,14 +44,6 @@ open class HFCardCollectionViewCell: UICollectionViewCell {
         }
         get {
             return self.contentView.backgroundColor
-        }
-    }
-    
-    /// Overwritten to update the shadowPath.
-    override open var bounds: CGRect {
-        didSet {
-            let shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: self.cornerRadius).cgPath
-            self.layer.shadowPath = shadowPath
         }
     }
     
@@ -89,8 +68,8 @@ open class HFCardCollectionViewCell: UICollectionViewCell {
         forView.layer.shadowPath = shadowPath
         forView.layer.masksToBounds = false
         forView.layer.shadowColor = UIColor(white: 0.0, alpha: 1.0).cgColor
-        forView.layer.shadowRadius = 2
-        forView.layer.shadowOpacity = 0.35
+        forView.layer.shadowRadius = 5
+        forView.layer.shadowOpacity = 0.1
         forView.layer.shadowOffset = CGSize(width: 0, height: 0)
         forView.layer.rasterizationScale = UIScreen.main.scale
         forView.layer.shouldRasterize = true
